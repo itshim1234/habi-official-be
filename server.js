@@ -8,7 +8,13 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: ["https://habi.one", "https://www.habi.one"],
+  methods: "POST",
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use("/pdfs", express.static(path.join(__dirname, "pdfs")));
 
 // Multer setup for file uploads
@@ -90,7 +96,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
     // Send email
     await transporter.sendMail(mailOptions);
 
-    res.json({ message: "PDF merged and sent successfully!" });
+    res.json({ message: "Quotation sent successfully!" });
   } catch (error) {
     console.error("Error processing PDF:", error);
     res.status(500).send("Error processing PDF");
