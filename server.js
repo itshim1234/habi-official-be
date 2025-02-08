@@ -46,6 +46,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
 
     const packageName = req.body.package;
     const userEmail = req.body.email;
+    const name = req.body.name;
 
     if (!packageMap[packageName])
       return res.status(400).send("Invalid package");
@@ -83,7 +84,18 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       from: process.env.EMAIL_USER,
       to: userEmail,
       subject: "Your Quotation PDF",
-      text: "Attached is your merged quotation document.",
+      text: `Dear ${name},
+
+      Thank you for reaching out. Please find attached the quotation as per your request.
+      
+      If you have any questions or need further clarifications, feel free to reply to this email.
+      
+      Looking forward to your response.
+      
+      Best regards,  
+      Habi-DESIGNASM TECHNOLOGIES PVT. LTD.
+      9606210818  
+      hello@habi.one`,
       attachments: [
         {
           filename: "Quotation.pdf",
