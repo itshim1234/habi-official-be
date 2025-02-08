@@ -9,7 +9,11 @@ require("dotenv").config();
 
 const app = express();
 const corsOptions = {
-  origin: ["https://habi.one", "https://www.habi.one"],
+  origin: [
+    "https://habi.one",
+    "https://www.habi.one",
+    "https://habi.one/cost-estimator",
+  ],
   methods: "POST",
   allowedHeaders: ["Content-Type", "Authorization"],
 };
