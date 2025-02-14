@@ -88,18 +88,34 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       from: process.env.EMAIL_USER,
       to: userEmail,
       subject: "Your Quotation PDF",
-      text: `Dear ${name},
-
-      Thank you for reaching out. Please find attached the quotation as per your request.
-      
-      If you have any questions or need further clarifications, feel free to reply to this email.
-      
-      Looking forward to your response.
-      
-      Best regards,  
-      Habi-DESIGNASM TECHNOLOGIES PVT. LTD.
-      9606210818  
-      hello@habi.one`,
+      html: `
+        <div style="
+          background-image: url('https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg'); 
+          background-size: cover; 
+          padding: 40px;
+          text-align: center;
+          font-family: Arial, sans-serif;
+          color: #ffffff;
+        ">
+          <h2 style="color: #ffcc00;">Dear ${name},</h2>
+          <p style="font-size: 18px; color: #ffffff;">
+            Thank you for reaching out. Please find attached the quotation as per your request.
+          </p>
+          <p style="font-size: 16px; font-style: italic; color: #dddddd;">
+            If you have any questions or need further clarifications, feel free to reply to this email.
+          </p>
+          <p style="font-size: 16px; font-weight: bold;">
+            Looking forward to your response.
+          </p>
+          <hr style="border: 1px solid #ffcc00;">
+          <p>
+            <strong>Best regards,</strong> <br>
+            <span style="color: #ffcc00;">Habi-DESIGNASM TECHNOLOGIES PVT. LTD.</span> <br>
+            <span style="color: #ffcc00;">9606210818</span> <br>
+            <a href="mailto:hello@habi.one" style="color: #ffcc00; text-decoration: none;">hello@habi.one</a>
+          </p>
+        </div>
+      `,
       attachments: [
         {
           filename: "Quotation.pdf",
