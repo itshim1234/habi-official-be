@@ -98,16 +98,16 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
           color: #ffffff;
         ">
           <h2 style="color: #ffcc00;">Dear ${name},</h2>
-          <p style="font-size: 18px; color: #ffffff;">
+          <p style="font-size: 18px;">
             Thank you for reaching out. Please find attached the quotation as per your request.
           </p>
-          <p style="font-size: 16px; font-style: italic; color: #dddddd;">
+          <p style="font-size: 16px; font-style: italic;">
             If you have any questions or need further clarifications, feel free to reply to this email.
           </p>
           <p style="font-size: 16px; font-weight: bold;">
             Looking forward to your response.
           </p>
-          <hr style="border: 1px solid #ffcc00;">
+          <br/>
           <p>
             <strong>Best regards,</strong> <br>
             <span style="color: #ffcc00;">Habi-DESIGNASM TECHNOLOGIES PVT. LTD.</span> <br>
