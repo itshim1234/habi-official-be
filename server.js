@@ -90,7 +90,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       subject: "Your Quotation PDF",
       html: `
         <div style="
-          background-image: url('https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg'); 
+          background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
           background-size: cover; 
           padding: 40px;
           text-align: center;
