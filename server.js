@@ -92,24 +92,23 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
         <div style="
           background-image: url('https://i.pinimg.com/736x/8e/52/49/8e524959a442229394b56a1dd3314697.jpg'); 
           background-size: cover; 
-          padding: 40px;
+          padding: 80px 40px 0px 40px;
           text-align: center;
           font-family: Arial, sans-serif;
           color: #ffffff;
         ">
           <h2 style="color: #ffcc00;">Dear ${name},</h2>
-          <p style="font-size: 18px;">
+          <p style="font-size: 18px; color: #000000">
             Thank you for reaching out. Please find attached the quotation as per your request.
           </p>
-          <p style="font-size: 16px; font-style: italic;">
+          <p style="font-size: 16px; font-style: italic; color: #000000">
             If you have any questions or need further clarifications, feel free to reply to this email.
           </p>
-          <p style="font-size: 16px; font-weight: bold;">
+          <p style="font-size: 16px; font-weight: bold; color: #000000">
             Looking forward to your response.
           </p>
-          <br/>
           <p>
-            <strong>Best regards,</strong> <br>
+            <span style="color: #000000"><strong>Best regards,</strong></span> <br>
             <span style="color: #ffcc00;">Habi-DESIGNASM TECHNOLOGIES PVT. LTD.</span> <br>
             <span style="color: #ffcc00;">9606210818</span> <br>
             <a href="mailto:hello@habi.one" style="color: #ffcc00; text-decoration: none;">hello@habi.one</a>
