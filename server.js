@@ -108,7 +108,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
         <!-- Content Section -->
         <div
             style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; margin-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 456px;">
-            <h2 style="font-size: 18px; color: #7c7c7c; padding-top: 40px;">Dear ${name},</h2>
+            <h2 style="font-size: 18px; color: #7c7c7c; padding-top: 40px; margin-top: 0px; margin-inline-start: 0px;">Dear ${name},</h2>
             <p style="font-size: 14px; padding-top: 8px; color: #7c7c7c;">
                 Thank you for reaching out. <br> Please find attached the quotation as per your request.
             </p>
