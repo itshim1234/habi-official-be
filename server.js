@@ -102,12 +102,12 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
         <!-- Top Section with Centered Logo -->
         <div style="justify-content: center; background: url('https://i.ibb.co/xqgZFt31/aaa.png') no-repeat center center; align-items: center; height: 108px; background-color: #ffffff; border-bottom: 1px dashed #7c7c7c;">
             <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo"
-                style="max-width: 180px; height: 60px; padding-top: 20px; justify-content: center; align-items: center;">
+                style="max-width: 180px; height: 60px; padding-top: 20px; padding-left:100px; justify-content: center; align-items: center;">
         </div>
 
         <!-- Content Section -->
         <div
-            style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 455px;">
+            style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; margin-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 445px;">
             <h2 style="font-size: 18px; color: #7c7c7c; padding-top: 40px;">Dear ${name},</h2>
             <p style="font-size: 14px; padding-top: 8px; color: #7c7c7c;">
                 Thank you for reaching out. <br> Please find attached the quotation as per your request.
