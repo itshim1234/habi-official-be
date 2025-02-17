@@ -118,7 +118,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
             <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
                 Looking forward to your response
                 <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: 0;" alt="">
-                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;"
+                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: -5px; right: 30px; width: 10px; opacity: 0.5;"
                     alt="">
             </p>
 
