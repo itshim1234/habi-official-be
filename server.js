@@ -44,6 +44,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Function to encode image to base64 (if you want to use inline images with base64)
+function encodeImageToBase64(imagePath) {
+  const imageBuffer = fs.readFileSync(imagePath);
+  return imageBuffer.toString("base64");
+}
+
 // Route to handle PDF merging and emailing
 app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
   try {
@@ -84,7 +90,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
     // Generate merged PDF buffer
     const mergedPdfBytes = await mergedPdf.save();
 
-    // Create email with merged PDF attachment
+    // Email content with CID (inline) images
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: userEmail,
@@ -95,12 +101,12 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
     
           <!-- Top Section with Centered Logo -->
           <div style="display: flex; justify-content: center; align-items: center; height: 90px;">
-            <img src="https://ibb.co/3m130wRz" alt="Habi Logo" style="max-width: 140px; padding-top: 40px;">
+            <img src="cid:logo" alt="Habi Logo" style="max-width: 140px; padding-top: 40px;">
           </div>
     
           <!-- Content Section -->
           <div
-            style="position: relative; background: url('https://ibb.co/8LzrDG2m') no-repeat center center; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 460px;">
+            style="position: relative; background: url('cid:bg') no-repeat center center; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 460px;">
             <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
             <p style="font-size: 14px; padding-top: 8px;">
               Thank you for reaching out. <br> Please find attached the quotation as per your request.
@@ -110,8 +116,8 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
             </p>
             <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
               Looking forward to your response
-              <img src="https://ibb.co/60xpRrxH" style="position: absolute; top: 0;" alt="">
-              <img src="https://ibb.co/60xpRrxH" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
+              <img src="cid:star1" style="position: absolute; top: 0;" alt="">
+              <img src="cid:star2" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
             </p>
     
             <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; padding-top: 30px; font-weight: semibold;">Best regards,</p>
@@ -122,11 +128,30 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
             <div style="bottom: 0; text-align: center; padding-top: 40px;">
               <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓</p>
             </div>
-            <img src="https://ibb.co/zWnc1kf0" alt="" style="position: absolute; top: 0; left: 20px;">
           </div>
         </div>
       `,
       attachments: [
+        {
+          filename: "Logo.png",
+          path: "./images/Logo.png",
+          cid: "logo", // CID identifier for the image
+        },
+        {
+          filename: "bg.png",
+          path: "./images/bg.png",
+          cid: "bg", // CID identifier for the background image
+        },
+        {
+          filename: "star1.png",
+          path: "./images/star.png",
+          cid: "star1", // CID identifier for the star image
+        },
+        {
+          filename: "star2.png",
+          path: "./images/star.png",
+          cid: "star2", // CID identifier for the star image
+        },
         {
           filename: "Quotation.pdf",
           content: Buffer.from(mergedPdfBytes),
@@ -146,8 +171,3 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
-
-// https://ibb.co/8LzrDG2m
-// https://ibb.co/zWnc1kf0
-// https://ibb.co/3m130wRz
-// https://ibb.co/60xpRrxH
