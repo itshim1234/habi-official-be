@@ -124,12 +124,12 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
 
             <p style="font-size: 14px; margin-bottom: 0em; padding-top: 20px; font-weight: bold; color: #7c7c7c;">
                 Best regards,</p>
-            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">habi homes</p>
-            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">9606210818</p>
-            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;"><a href="mailto:hello@habi.one"
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.2em; color: #7c7c7c;">habi homes</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.2em; color: #7c7c7c;">9606210818</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.2em; color: #7c7c7c;"><a href="mailto:hello@habi.one"
                     style="color: #7c7c7c; text-decoration: none;">hello@habi.one</a></p>
 
-            <div style="text-align: center; padding-top: 20px;">
+            <div style="text-align: center; padding-top: 25px;">
                 <p style="font-size: 14px; margin-bottom: 0em; color: #7c7c7c;">↓ Quotation here ↓
                 </p>
             </div>
