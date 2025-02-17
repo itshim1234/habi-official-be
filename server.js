@@ -96,12 +96,13 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       to: userEmail,
       subject: "Your Quotation PDF",
       html: `
-      <div
-        style="justify-content: center; max-width: 450px; height: 700px; margin: 0 auto; background-color:rgb(255, 255, 255); border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
+       <div
+        style="justify-content: center; max-width: 450px; height: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
 
         <!-- Top Section with Centered Logo -->
-        <div style="display: flex; justify-content: center; align-items: center; height: 100px; background-color:rgb(255, 255, 255); border-bottom: 1px solid rgb(0, 0, 0);">
-            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo" style="max-width: 140px; height: 60px;">
+        <div style="justify-content: center; align-items: center; height: 100px;">
+            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo"
+                style="max-width: 140px; height: 60px; padding-top: 40px; justify-content: center; align-items: center;">
         </div>
 
         <!-- Content Section -->
@@ -117,8 +118,8 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
             <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
                 Looking forward to your response
                 <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: 0;" alt="">
-                <img src="https://i.ibb.co/xq0cSX01/star.png"
-                    style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
+                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;"
+                    alt="">
             </p>
 
             <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold;">
@@ -133,6 +134,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
                 </p>
             </div>
         </div>
+    </div>
     </div>
       `,
       attachments: [
