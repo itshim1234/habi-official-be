@@ -101,7 +101,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
 
         <!-- Top Section with Centered Logo -->
         <div style="display: flex; justify-content: center; align-items: center; height: 100px; background-color:rgb(255, 255, 255); border-bottom: 1px solid rgb(0, 0, 0);">
-            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo" style="max-width: 140px;">
+            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo" style="max-width: 140px; height: 60px;">
         </div>
 
         <!-- Content Section -->
