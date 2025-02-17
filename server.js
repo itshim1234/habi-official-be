@@ -108,8 +108,8 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
         <!-- Content Section -->
         <div
             style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 460px;">
-            <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
-            <p style="font-size: 14px; padding-top: 8px;">
+            <h2 style="font-size: 18px; color: #1a1a1a; padding-top: 40px;">Dear ${name},</h2>
+            <p style="font-size: 14px; padding-top: 8px; color: #1a1a1a;">
                 Thank you for reaching out. <br> Please find attached the quotation as per your request.
             </p>
             <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
@@ -122,7 +122,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
                     alt="">
             </p>
 
-            <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold;">
+            <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold; color: #1a1a1a;">
                 Best regards,</p>
             <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">habi homes</p>
             <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">9606210818</p>
