@@ -100,7 +100,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
         style="justify-content: center; max-width: 450px; height: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
 
         <!-- Top Section with Centered Logo -->
-        <div style="justify-content: center; background: url('https://i.ibb.co/xqgZFt31/aaa.png') no-repeat center center; align-items: center; height: 100px; background-color: #ffffff;">
+        <div style="justify-content: center; background: url('https://i.ibb.co/xqgZFt31/aaa.png') no-repeat center center; align-items: center; height: 100px; background-color: #ffffff; border-bottom: 1px dashed #7c7c7c;">
             <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo"
                 style="max-width: 180px; height: 60px; padding-top: 40px; justify-content: center; align-items: center;">
         </div>
