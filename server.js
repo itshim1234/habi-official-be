@@ -97,16 +97,16 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       subject: "Your Quotation PDF",
       html: `
         <div
-          style="max-width: 400px; height: 566px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
+          style="justify-content: center; max-width: 420px; height: 580px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
     
           <!-- Top Section with Centered Logo -->
           <div style="display: flex; justify-content: center; align-items: center; height: 90px;">
-            <img src="cid:logo" alt="Habi Logo" style="max-width: 140px; padding-top: 40px;">
+            <img src="cid:logo" alt="Habi Logo" style="max-width: 140px; padding-top: 40px; justify-content: center; align-items: center;">
           </div>
     
           <!-- Content Section -->
           <div
-            style="position: relative; background: url('cid:bg') no-repeat center center; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 460px;">
+            style="position: relative; background: url('cid:bg') no-repeat center center; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 490px;">
             <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
             <p style="font-size: 14px; padding-top: 8px;">
               Thank you for reaching out. <br> Please find attached the quotation as per your request.
@@ -116,8 +116,8 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
             </p>
             <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
               Looking forward to your response
-              <img src="cid:star1" style="position: absolute; top: 0;" alt="">
-              <img src="cid:star2" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
+              <img src="cid:star" style="position: absolute; top: 0;" alt="">
+              <img src="cid:star" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
             </p>
     
             <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; padding-top: 30px; font-weight: semibold;">Best regards,</p>
@@ -128,6 +128,8 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
             <div style="bottom: 0; text-align: center; padding-top: 40px;">
               <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓</p>
             </div>
+                        <img src="cid:line" alt="" style="position: absolute; top: 0; left: 20px;">
+
           </div>
         </div>
       `,
@@ -143,15 +145,16 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
           cid: "bg", // CID identifier for the background image
         },
         {
-          filename: "star1.png",
+          filename: "star.png",
           path: "./images/star.png",
-          cid: "star1", // CID identifier for the star image
+          cid: "star", // CID identifier for the star image
         },
         {
-          filename: "star2.png",
-          path: "./images/star.png",
-          cid: "star2", // CID identifier for the star image
+          filename: "line.png",
+          path: "./images/line.png",
+          cid: "line", // CID identifier for the star image
         },
+
         {
           filename: "Quotation.pdf",
           content: Buffer.from(mergedPdfBytes),
