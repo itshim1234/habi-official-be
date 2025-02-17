@@ -90,95 +90,59 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
     // Generate merged PDF buffer
     const mergedPdfBytes = await mergedPdf.save();
 
-    // Encode images to base64
-    const logoBase64 = encodeImageToBase64(
-      path.join(__dirname, "images", "Logo.png")
-    );
-    const starBase64 = encodeImageToBase64(
-      path.join(__dirname, "images", "star.png")
-    );
-    const lineBase64 = encodeImageToBase64(
-      path.join(__dirname, "images", "line.png")
-    );
-    const bgBase64 = encodeImageToBase64(
-      path.join(__dirname, "images", "bg.png")
-    );
-
     // Email content with CID (inline) images
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: userEmail,
       subject: "Your Quotation PDF",
       html: `
-        <div style="justify-content: center; max-width: 420px; height: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
-            <!-- Top Section with Centered Logo -->
-            <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
-                <img src="cid:logo" alt="Habi Logo" style="max-width: 140px; padding-top: 40px; justify-content: center; align-items: center;">
-            </div>
+       <div
+        style="justify-content: center; max-width: 420px; height: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
 
-            <!-- Content Section -->
-            <div style="position: relative; background: url(cid:bg) no-repeat center center; padding-top: 0px; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 460px;">
-                <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
-                <p style="font-size: 14px; padding-top: 8px;">
-                    Thank you for reaching out. <br> Please find attached the quotation as per your request.
-                </p>
-                <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
-                    If you have any questions or need further clarifications, feel free to reply to this email.
-                </p>
-                <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
-                    Looking forward to your response
-                    <img src="cid:star1" style="position: absolute; top: 0;" alt="">
-                    <img src="cid:star2" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
-                </p>
-
-                <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold;">
-                    Best regards,</p>
-                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">habi homes</p>
-                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">9606210818</p>
-                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;"><a href="mailto:hello@habi.one" style="color: #000000; text-decoration: none;">hello@habi.one</a></p>
-
-                <div style="bottom: 0; text-align: center; padding-top: 30px;">
-                    <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓</p>
-                </div>
-                <img src="cid:line" alt="" style="position: absolute; top: 0; left: 20px;">
-            </div>
+        <!-- Top Section with Centered Logo -->
+        <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
+            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo"
+                style="max-width: 140px; padding-top: 40px; justify-content: center; align-items: center;">
         </div>
+
+        <!-- Content Section -->
+        <div
+            style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 460px;">
+            <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
+            <p style="font-size: 14px; padding-top: 8px;">
+                Thank you for reaching out. <br> Please find attached the quotation as per your request.
+            </p>
+            <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
+                If you have any questions or need further clarifications, feel free to reply to this email.
+            </p>
+            <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
+                Looking forward to your response
+                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: 0;" alt="">
+                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;"
+                    alt="">
+            </p>
+
+            <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold;">
+                Best regards,</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">habi homes</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">9606210818</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;"><a href="mailto:hello@habi.one"
+                    style="color: #000000; text-decoration: none;">hello@habi.one</a></p>
+
+            <div style="bottom: 0; text-align: center; padding-top: 30px;">
+                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓
+                </p>
+            </div>
+            <img src="https://i.ibb.co/LDkwMGp2/line.png" alt="" style="position: absolute; top: 0; left: 20px;">
+        </div>
+    </div>
+    </div>
       `,
       attachments: [
         {
           filename: "Quotation.pdf",
           content: Buffer.from(mergedPdfBytes),
           contentType: "application/pdf",
-        },
-        {
-          filename: "Logo.png",
-          content: logoBase64,
-          encoding: "base64",
-          cid: "logo", // CID for logo
-        },
-        {
-          filename: "star.png",
-          content: starBase64,
-          encoding: "base64",
-          cid: "star1", // CID for first star
-        },
-        {
-          filename: "star.png",
-          content: starBase64,
-          encoding: "base64",
-          cid: "star2", // CID for second star
-        },
-        {
-          filename: "line.png",
-          content: lineBase64,
-          encoding: "base64",
-          cid: "line", // CID for line
-        },
-        {
-          filename: "bg.png",
-          content: bgBase64,
-          encoding: "base64",
-          cid: "bg", // CID for background
         },
       ],
     };
