@@ -20,6 +20,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use("/pdfs", express.static(path.join(__dirname, "pdfs")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Multer setup for file uploads
 const upload = multer({ storage: multer.memoryStorage() });
@@ -89,31 +90,40 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       to: userEmail,
       subject: "Your Quotation PDF",
       html: `
-        <div style="
-          background-image: url('https://i.ibb.co/JRSN3tvM/teju-habi.jpg'); 
-          background-size: cover; 
-          padding: 40px;
-          text-align: center;
-          font-family: Arial, sans-serif;
-          color: #ffffff;
-        ">
-          <h2 style="color: #ffcc00;">Dear ${name},</h2>
-          <p style="font-size: 18px; color: #ffffff;">
-            Thank you for reaching out. Please find attached the quotation as per your request.
-          </p>
-          <p style="font-size: 16px; font-style: italic; color: #dddddd;">
-            If you have any questions or need further clarifications, feel free to reply to this email.
-          </p>
-          <p style="font-size: 16px; font-weight: bold;">
-            Looking forward to your response.
-          </p>
-          <hr style="border: 1px solid #ffcc00;">
-          <p>
-            <strong>Best regards,</strong> <br>
-            <span style="color: #ffcc00;">Habi-DESIGNASM TECHNOLOGIES PVT. LTD.</span> <br>
-            <span style="color: #ffcc00;">9606210818</span> <br>
-            <a href="mailto:hello@habi.one" style="color: #ffcc00; text-decoration: none;">hello@habi.one</a>
-          </p>
+        <div
+          style="max-width: 400px; height: 566px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
+    
+          <!-- Top Section with Centered Logo -->
+          <div style="display: flex; justify-content: center; align-items: center; height: 90px;">
+            <img src="/images/Logo.png" alt="Habi Logo" style="max-width: 140px; padding-top: 40px;">
+          </div>
+    
+          <!-- Content Section -->
+          <div
+            style="position: relative; background: url('/images/bg.png') no-repeat center center; padding-left: 40px; padding-right: 40px; text-align: center; color: #333333; height: 460px;">
+            <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
+            <p style="font-size: 14px; padding-top: 8px;">
+              Thank you for reaching out. <br> Please find attached the quotation as per your request.
+            </p>
+            <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
+              If you have any questions or need further clarifications, feel free to reply to this email.
+            </p>
+            <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
+              Looking forward to your response
+              <img src="/images/star.png" style="position: absolute; top: 0;" alt="">
+              <img src="/images/star.png" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
+            </p>
+    
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; padding-top: 30px;">Best regards,</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">habi homes</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">9606210818</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;"><a href="mailto:hello@habi.one" style="color: #000000; text-decoration: none;">hello@habi.one</a></p>
+    
+            <div style="bottom: 0; text-align: center; padding-top: 40px;">
+              <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓</p>
+            </div>
+            <img src="/images/line.png" alt="" style="position: absolute; top: 0; left: 20px;">
+          </div>
         </div>
       `,
       attachments: [
