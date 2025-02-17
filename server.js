@@ -96,44 +96,44 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
       to: userEmail,
       subject: "Your Quotation PDF",
       html: `
-        <div style="justify-content: center; max-width: 450px; height: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
-    
-            <!-- Top Section with Centered Logo -->
-            <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
-                <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo"
-                    style="">
-            </div>
-    
-            <!-- Content Section -->
-            <div
-                style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 460px;">
-                <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
-                <p style="font-size: 14px; padding-top: 8px;">
-                    Thank you for reaching out. <br> Please find attached the quotation as per your request.
+      <div
+        style="justify-content: center; max-width: 450px; height: 700px; margin: 0 auto; background-color:rgb(255, 255, 255); border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
+
+        <!-- Top Section with Centered Logo -->
+        <div style="display: flex; justify-content: center; align-items: center; height: 100px; background-color:rgb(255, 255, 255); border-bottom: 1px solid rgb(0, 0, 0);">
+            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo" style="max-width: 140px;">
+        </div>
+
+        <!-- Content Section -->
+        <div
+            style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 460px;">
+            <h2 style="font-size: 18px; color: #000000; padding-top: 40px;">Dear ${name},</h2>
+            <p style="font-size: 14px; padding-top: 8px;">
+                Thank you for reaching out. <br> Please find attached the quotation as per your request.
+            </p>
+            <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
+                If you have any questions or need further clarifications, feel free to reply to this email.
+            </p>
+            <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
+                Looking forward to your response
+                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: 0;" alt="">
+                <img src="https://i.ibb.co/xq0cSX01/star.png"
+                    style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;" alt="">
+            </p>
+
+            <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold;">
+                Best regards,</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">habi homes</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">9606210818</p>
+            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;"><a href="mailto:hello@habi.one"
+                    style="color: #000000; text-decoration: none;">hello@habi.one</a></p>
+
+            <div style="bottom: 0; text-align: center; padding-top: 30px;">
+                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓
                 </p>
-                <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
-                    If you have any questions or need further clarifications, feel free to reply to this email.
-                </p>
-                <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
-                    Looking forward to your response
-                    <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: 0;" alt="">
-                    <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: -5px; right: 5px; width: 10px; opacity: 0.5;"
-                        alt="">
-                </p>
-    
-                <p style="font-size: 14px; margin-bottom: 0em; padding-top: 25px; font-weight: bold;">
-                    Best regards,</p>
-                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">habi homes</p>
-                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;">9606210818</p>
-                <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em;"><a href="mailto:hello@habi.one"
-                        style="color: #000000; text-decoration: none;">hello@habi.one</a></p>
-    
-                <div style="bottom: 0; text-align: center; padding-top: 30px;">
-                    <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.3em; color: #7c7c7c;">↓ Quotation here ↓
-                    </p>
-                </div>
             </div>
         </div>
+    </div>
       `,
       attachments: [
         {
