@@ -12,7 +12,7 @@ const corsOptions = {
   origin: [
     "https://habi.one",
     "https://www.habi.one",
-    "https://habi.one/cost-estimator",
+    "https://habi.one/Construction-Cost-Calculator",
   ],
   methods: "POST",
   allowedHeaders: ["Content-Type", "Authorization"],
