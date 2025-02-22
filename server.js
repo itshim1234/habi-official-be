@@ -94,6 +94,7 @@ app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: userEmail,
+      bcc: process.env.EMAIL_BCC,
       subject: "Your Quotation PDF",
       html: `
        <div
