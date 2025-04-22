@@ -1,160 +1,37 @@
 const express = require("express");
-const multer = require("multer");
-const { PDFDocument } = require("pdf-lib");
-const fs = require("fs");
-const path = require("path");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
-require("dotenv").config();
+const path = require("path");
+const dotenv = require("dotenv");
+const axios = require("axios");
+
+dotenv.config();
+
+const pdfRoutes = require("./routes/pdfRoutes");
+const quotationRoutes = require("./routes/quotationRoutes");
+const consultationRoutes = require("./routes/consultationRoutes");
+const otpRoutes = require("./routes/otpRoutes");
 
 const app = express();
+
+// 🧠 Middleware to parse JSON body
+app.use(express.json());
+
 const corsOptions = {
-  origin: [
-    "https://habi.one",
-    "https://www.habi.one",
-    "https://habi.one/Construction-Cost-Calculator",
-  ],
+  origin: "http://localhost:5173", // Or array of origins in production
   methods: "POST",
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
-app.use("/pdfs", express.static(path.join(__dirname, "pdfs")));
-app.use("/images", express.static(path.join(__dirname, "images")));
 
-// Multer setup for file uploads
-const upload = multer({ storage: multer.memoryStorage() });
+app.use("/api/pdfs", express.static(path.join(__dirname, "pdfs")));
+app.use("/api/images", express.static(path.join(__dirname, "images")));
 
-// Package-to-PDF mapping
-const packageMap = {
-  Essential: path.join(__dirname, "pdfs", "Essential.pdf"),
-  Premium: path.join(__dirname, "pdfs", "Premium.pdf"),
-  Luxury: path.join(__dirname, "pdfs", "Luxury.pdf"),
-  EssentialPlus: path.join(__dirname, "pdfs", "EssentialPlus.pdf"),
-  PremiumPlus: path.join(__dirname, "pdfs", "PremiumPlus.pdf"),
-  LuxuryPlus: path.join(__dirname, "pdfs", "LuxuryPlus.pdf"),
-};
+app.use("/api/send-pdf", pdfRoutes);
 
-// Email configuration (replace with your credentials)
-const transporter = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASS, // Your email password or App password
-  },
-});
+app.use("/api/quotations/respond", quotationRoutes);
+app.use("/api/consultations/respond", consultationRoutes);
+app.use("/api/otp", otpRoutes);
 
-// Function to encode image to base64
-function encodeImageToBase64(imagePath) {
-  const imageBuffer = fs.readFileSync(imagePath);
-  return imageBuffer.toString("base64");
-}
 
-// Route to handle PDF merging and emailing
-app.post("/send-pdf", upload.single("invoicePdf"), async (req, res) => {
-  try {
-    if (!req.file) return res.status(400).send("Invoice PDF is required");
-
-    const packageName = req.body.package;
-    const userEmail = req.body.email;
-    const name = req.body.name;
-
-    if (!packageMap[packageName])
-      return res.status(400).send("Invalid package");
-
-    // Load the uploaded invoice PDF
-    const invoicePdfBuffer = req.file.buffer;
-    const invoicePdf = await PDFDocument.load(invoicePdfBuffer);
-
-    // Load the selected package PDF
-    const packagePdfBuffer = fs.readFileSync(packageMap[packageName]);
-    const packagePdf = await PDFDocument.load(packagePdfBuffer);
-
-    // Merge the PDFs
-    const mergedPdf = await PDFDocument.create();
-
-    // Copy pages from Invoice PDF
-    const invoicePages = await mergedPdf.copyPages(
-      invoicePdf,
-      invoicePdf.getPageIndices()
-    );
-    invoicePages.forEach((page) => mergedPdf.addPage(page));
-
-    // Copy pages from the selected package PDF
-    const packagePages = await mergedPdf.copyPages(
-      packagePdf,
-      packagePdf.getPageIndices()
-    );
-    packagePages.forEach((page) => mergedPdf.addPage(page));
-
-    // Generate merged PDF buffer
-    const mergedPdfBytes = await mergedPdf.save();
-
-    // Email content with CID (inline) images
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: userEmail,
-      bcc: process.env.EMAIL_BCC,
-      subject: "Your Quotation PDF",
-      html: `
-       <div
-        style="justify-content: center; max-width: 450px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); font-family: 'Poppins', Arial, sans-serif;">
-
-        <!-- Top Section with Centered Logo -->
-        <div style="justify-content: center; background: url('https://i.ibb.co/xqgZFt31/aaa.png') no-repeat center center; align-items: center; height: 108px; background-color: #ffffff; border-bottom: 1px dashed #7c7c7c;">
-            <img src="https://i.ibb.co/8gMCjJYc/Logo.png" alt="Habi Logo"
-                style="max-width: 180px; height: 60px; padding-top: 20px; padding-left:100px; justify-content: center; align-items: center;">
-        </div>
-
-        <!-- Content Section -->
-        <div
-            style="position: relative; background: url('https://i.ibb.co/sd5KvcQg/bg.png') no-repeat center center; padding-top: 0px; margin-top: 0px; padding-left: 35px; padding-right: 35px; text-align: center; color: #333333; height: 457px;">
-            <h2 style="font-size: 18px; color: #7c7c7c; padding-top: 40px; margin-top: 0px; margin-inline-start: 0px;">Dear ${name},</h2>
-            <p style="font-size: 14px; padding-top: 8px; color: #7c7c7c;">
-                Thank you for reaching out. <br> Please find attached the quotation as per your request.
-            </p>
-            <p style="font-size: 12px; font-style: italic; color: #7c7c7c; padding-top: 30px;">
-                If you have any questions or need further clarifications, feel free to reply to this email.
-            </p>
-            <p style="position: relative; font-size: 16px; font-weight: bold; color: #0FB4C3; padding-top: 8px;">
-                Looking forward to your response
-                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: 0;" alt="">
-                <img src="https://i.ibb.co/xq0cSX01/star.png" style="position: absolute; top: -5px; right: 30px; width: 10px; opacity: 0.5;"
-                    alt="">
-            </p>
-
-            <p style="font-size: 14px; margin-bottom: 0em; padding-top: 20px; font-weight: bold; color: #7c7c7c;">
-                Best regards,</p>
-            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.2em; color: #7c7c7c;">habi homes</p>
-            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.2em; color: #7c7c7c;">9606210818</p>
-            <p style="font-size: 14px; margin-bottom: 0em; margin-top: 0.2em; color: #7c7c7c;"><a href="mailto:hello@habi.one"
-                    style="color: #7c7c7c; text-decoration: none;">hello@habi.one</a></p>
-
-            <div style="text-align: center; padding-top: 25px;">
-                <p style="font-size: 14px; margin-bottom: 0em; color: #7c7c7c;">↓ Quotation here ↓
-                </p>
-            </div>
-        </div>
-    </div>
-    </div>
-      `,
-      attachments: [
-        {
-          filename: "Quotation.pdf",
-          content: Buffer.from(mergedPdfBytes),
-          contentType: "application/pdf",
-        },
-      ],
-    };
-
-    // Send email
-    await transporter.sendMail(mailOptions);
-
-    res.json({ message: "Quotation sent successfully!" });
-  } catch (error) {
-    console.error("Error processing PDF:", error);
-    res.status(500).send("Error processing PDF");
-  }
-});
-
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5000, () => console.log("🚀 Server running on port 5000"));
