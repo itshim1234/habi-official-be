@@ -37,6 +37,8 @@ app.use("/api/quotations/respond", quotationRoutes);
 app.use("/api/consultations/respond", consultationRoutes);
 app.use("/api/otp", otpRoutes);
 
+app.get("/healthz", (req, res) => res.send("OK"));
+
 app.listen(process.env.PORT || 4000, () =>
   console.log("🚀 Server running on port 5000")
 );
