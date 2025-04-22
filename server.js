@@ -17,7 +17,11 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Or array of origins in production
+  origin: [
+    "https://habi.one",
+    "https://www.habi.one",
+    "https://habi.one/Construction-Cost-Calculator",
+  ], // Or array of origins in production // Or array of origins in production
   methods: "POST",
   allowedHeaders: ["Content-Type", "Authorization"],
 };
@@ -33,5 +37,6 @@ app.use("/api/quotations/respond", quotationRoutes);
 app.use("/api/consultations/respond", consultationRoutes);
 app.use("/api/otp", otpRoutes);
 
-
-app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+app.listen(process.env.PORT || 4000, () =>
+  console.log("🚀 Server running on port 5000")
+);
