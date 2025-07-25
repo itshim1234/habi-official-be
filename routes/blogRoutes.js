@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middlewares/multerConfig");
-const { sendPdf } = require("../controllers/pdfController");
+const {createPost,getAllBlogs} = require("../controllers/blogControllers");
 
-router.post("/", upload.single("invoicePdf"), sendPdf);
+router.post("/create", createPost);
+
+router.get("/blogs", getAllBlogs);
 
 module.exports = router;
